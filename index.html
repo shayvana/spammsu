@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>shayna provine</title>
+    <link rel="icon" href="sucrose.ico" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;700&family=Inconsolata:wght@400;700&family=Major+Mono+Display&display=swap');
 
@@ -20,11 +21,19 @@
             padding: 0;
             height: 100%;
             font-family: 'Work Sans', sans-serif;
-            background-color: var(--outer-bg-color);
             color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+        }
+        #digital-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
         .container {
             text-align: center;
@@ -33,9 +42,11 @@
             background-color: var(--inner-bg-color);
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(0, 91, 170, 0.1);
+            position: relative;
+            z-index: 1;
         }
         h1 {
-            font-family: 'Space Mono', monospace;
+            font-family: 'Major Mono Display', monospace;
             font-size: 2.5em;
             margin-bottom: 5px;
             color: var(--accent-color);
@@ -70,13 +81,13 @@
         .content-wrapper {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: stretch;
         }
         .project-section {
-            width: 35%;
+            width: 38%;
         }
         .section-title {
-            font-family: 'Iconsolata', monospace;
+            font-family: 'Major Mono Display', monospace;
             font-size: 1.3em;
             color: var(--accent-color);
             margin-bottom: 15px;
@@ -116,11 +127,8 @@
             opacity: 1;
             left: -15px;
         }
-        .content-wrapper {
-            align-items: stretch;
-        }
         .gif-container {
-            width: 60%;
+            width: 58%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -165,6 +173,7 @@
     </style>
 </head>
 <body>
+    <canvas id="digital-rain"></canvas>
     <div class="loading-bar" id="loadingBar"></div>
     <div class="container">
         <h1>shayna provine</h1>
@@ -176,20 +185,20 @@
             <div class="project-section">
                 <div class="section-title">i like:</div>
                 <ul class="project-list">
-                    <li><a href="https://github.com/shayvana/accordbot" class="project-item">microblogging on discord</a></li>
-                    <li><a href="https://chessopeningrecs-53859b1c936b.herokuapp.com/" class="project-item">chess opening recommendations</a></li>
-                    <li><a href="https://github.com/shayvana/one-more-link" class="project-item">saving links</a></li>
+                    <li><a href="#" class="project-item">microblogging on discord</a></li>
+                    <li><a href="#" class="project-item">chess opening recommendations</a></li>
+                    <li><a href="#" class="project-item">saving links</a></li>
                 </ul>
                 <div class="section-title">you like:</div>
                 <ul class="project-list">
-                    <li><a href="https://read.cv/shayvana" class="project-item">my resume</a></li>
-                    <li><a href="https://ttwpa.bearblog.dev/" class="project-item">my blog</a></li>
-                    <li><a href="https://github.com/shayvana" class="project-item">judging me</a></li>
-                    <li><a href="https://www.linkedin.com/in/shayna-provine/" class="project-item">me</a></li>
+                    <li><a href="#" class="project-item">my resume</a></li>
+                    <li><a href="#" class="project-item">my blog</a></li>
+                    <li><a href="#" class="project-item">judging me</a></li>
+                    <li><a href="#" class="project-item">me</a></li>
                 </ul>
             </div>
             <div class="gif-container">
-                <img src="image.png" alt="hanekawa" />
+                <img src="image.png" alt="Your GIF here" />
             </div>
         </div>
         <div class="music-player">
@@ -252,24 +261,62 @@
             typeWriter();
         }
 
-        function updateMusicPlayer() {
+        function setMusicPlayer() {
             const songs = [
                 { track: "the girl, so confusing version with lorde", artist: "charli xcx" },
                 { track: "mamushi", artist: "megan thee stallion" },
-                { track: "rockstar", artist: "lisa" },
+                { track: "rockstar", artist: "post malone" },
                 { track: "girls", artist: "the kid laroi" },
-                { track: "i had some help", artist: "post malone" },
+                { track: "i had some help", artist: "lisa" },
                 { track: "tough", artist: "quavo and lana del ray" }
             ];
             const randomSong = songs[Math.floor(Math.random() * songs.length)];
             document.getElementById('musicPlayer').textContent = `♪ currently listening to: ${randomSong.track} by ${randomSong.artist} ♪`;
         }
 
+        const canvas = document.getElementById('digital-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function drawRain() {
+            ctx.fillStyle = 'rgba(230, 243, 255, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#005BAA';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
         window.onload = function() {
             updateDynamicHeader();
-            updateMusicPlayer();
-            setInterval(updateMusicPlayer, 30000);
+            setMusicPlayer();
+            setInterval(drawRain, 33);
         }
+
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
