@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shayna provine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;700&family=Inconsolata:wght@400;700&family=Major+Mono+Display&display=swap');
+
+        :root {
+            --outer-bg-color: #E6F3FF;
+            --inner-bg-color: #FFF9E6;
+            --text-color: #005BAA;
+            --accent-color: #EB0029;
+            --highlight-color: #FFFFFF;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Work Sans', sans-serif;
+            background-color: var(--outer-bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+            background-color: var(--inner-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 91, 170, 0.1);
+        }
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+        .dynamic-header {
+            font-family: 'Inconsolata', monospace;
+            font-size: 1.1em;
+            color: var(--accent-color);
+            white-space: nowrap;
+            display: inline-block;
+            position: relative;
+            font-style: italic;
+        }
+        .dynamic-header::after {
+            content: '|';
+            position: absolute;
+            right: -10px;
+            top: 0;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .intro {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .content-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .project-section {
+            width: 35%;
+        }
+        .section-title {
+            font-family: 'Iconsolata', monospace;
+            font-size: 1.3em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .project-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .project-item {
+            margin: 15px 0;
+            transition: all 0.3s;
+            padding: 10px;
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            text-align: left;
+            position: relative;
+            text-decoration: none;
+            display: block;
+        }
+        .project-item:hover {
+            transform: translateX(10px);
+            background-color: var(--text-color);
+            color: var(--highlight-color);
+        }
+        .project-item::before {
+            content: '>';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: opacity 0.3s, left 0.3s;
+            color: var(--accent-color);
+        }
+        .project-item:hover::before {
+            opacity: 1;
+            left: -15px;
+        }
+        .content-wrapper {
+            align-items: stretch;
+        }
+        .gif-container {
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--highlight-color);
+            border-radius: 5px;
+        }
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .loading-bar {
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: width 0.5s;
+        }
+        .music-player {
+            font-family: 'Roboto Mono', monospace;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: var(--highlight-color);
+            border-radius: 4px;
+            font-size: 0.9em;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .music-player-content {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 20s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-bar" id="loadingBar"></div>
+    <div class="container">
+        <h1>shayna provine</h1>
+        <div class="dynamic-header" id="dynamicHeader"></div>
+        <div class="intro">
+            swe in logistics based in honolulu. undergrad @illinoiscs. masters @cuengineering.
+        </div>
+        <div class="content-wrapper">
+            <div class="project-section">
+                <div class="section-title">i like:</div>
+                <ul class="project-list">
+                    <li><a href="https://github.com/shayvana/accordbot" class="project-item">microblogging on discord</a></li>
+                    <li><a href="https://chessopeningrecs-53859b1c936b.herokuapp.com/" class="project-item">chess opening recommendations</a></li>
+                    <li><a href="https://github.com/shayvana/one-more-link" class="project-item">saving links</a></li>
+                </ul>
+                <div class="section-title">you like:</div>
+                <ul class="project-list">
+                    <li><a href="https://read.cv/shayvana" class="project-item">my resume</a></li>
+                    <li><a href="https://ttwpa.bearblog.dev/" class="project-item">my blog</a></li>
+                    <li><a href="https://github.com/shayvana" class="project-item">judging me</a></li>
+                    <li><a href="https://www.linkedin.com/in/shayna-provine/" class="project-item">me</a></li>
+                </ul>
+            </div>
+            <div class="gif-container">
+                <img src="image.png" alt="hanekawa" />
+            </div>
+        </div>
+        <div class="music-player">
+            <div class="music-player-content" id="musicPlayer">
+                ♪ currently listening to: [Song Name] by [Artist] ♪
+            </div>
+        </div>
+    </div>
+    <script>
+        function loadProject(projectName) {
+            const loadingBar = document.getElementById('loadingBar');
+            loadingBar.style.width = '0%';
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        alert(`${projectName} loaded!`);
+                        loadingBar.style.width = '0%';
+                    }, 500);
+                }
+                loadingBar.style.width = `${progress}%`;
+            }, 100);
+        }
+
+        function updateDynamicHeader() {
+            const headers = [
+                "getting ping diffed in hawaii",
+                "gone fishing",
+                "watching code geass",
+                "pythonista",
+                "london player",
+                "probably at the beach",
+                "learning about robots",
+                "dreaming in cyberspace",
+                "data streams and cyber dreams",
+                "mmo enjoyer",
+                "reading berserk",
+                "inhabiting the internet",
+                "spam musubi enjoyer",
+                "bridging the physical and the wired",
+                "lets all love lain",
+                "reading designing data-intensive applications"
+            ];
+            const randomHeader = headers[Math.floor(Math.random() * headers.length)];
+            const headerElement = document.getElementById('dynamicHeader');
+            headerElement.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < randomHeader.length) {
+                    headerElement.textContent += randomHeader.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        }
+
+        function updateMusicPlayer() {
+            const songs = [
+                { track: "the girl, so confusing version with lorde", artist: "charli xcx" },
+                { track: "mamushi", artist: "megan thee stallion" },
+                { track: "rockstar", artist: "lisa" },
+                { track: "girls", artist: "the kid laroi" },
+                { track: "i had some help", artist: "post malone" },
+                { track: "tough", artist: "quavo and lana del ray" }
+            ];
+            const randomSong = songs[Math.floor(Math.random() * songs.length)];
+            document.getElementById('musicPlayer').textContent = `♪ currently listening to: ${randomSong.track} by ${randomSong.artist} ♪`;
+        }
+
+        window.onload = function() {
+            updateDynamicHeader();
+            updateMusicPlayer();
+            setInterval(updateMusicPlayer, 30000);
+        }
+    </script>
+</body>
+</html>
